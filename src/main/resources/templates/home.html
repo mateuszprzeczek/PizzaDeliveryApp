@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pizza Manager</title>
+</head>
+<body>
+    <h1>Add new Pizza</h1>
+    <form th:action="@{/home}" th:object="${pizzaModel}" method="POST">
+
+    <p><input type="text" th:text="*{name}" placeholder="Pizza name"></p>
+    <div class="grid">
+        <div class="ingredient-group" id="wraps">
+            <h3>Wybierz rodzaj mąki: </h3>
+            <div th:each="ingredient : ${wrap}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}">SKŁADNIK</span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="proteins">
+            <h3>Wybierz rodzaj mięsa: </h3>
+            <div th:each="ingredient : ${protein}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}">SKŁADNIK</span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="cheeses">
+            <h3>Wybierz rodzaj sera: </h3>
+            <div th:each="ingredient : ${cheese}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}">SKŁADNIK</span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="veggies">
+            <h3>Wybierz warzywa: </h3>
+            <div th:each="ingredient : ${veggies}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}">SKŁADNIK</span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="sauces">
+            <h3>Wybierz sosy: </h3>
+            <div th:each="ingredient : ${sauce}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}">SKŁADNIK</span><br/>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button>Wyślij swoje zamówienie</button>
+    </form>
+
+</body>
+</html>
