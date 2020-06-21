@@ -21,6 +21,7 @@ import pl.mateuszprzeczek.repository.PizzaRepository;
 public class PizzaRestController {
 	
 	private PizzaRepository pizzaRepo;
+	
 
 	@Autowired
 	public PizzaRestController(PizzaRepository pizzaRepo) {
