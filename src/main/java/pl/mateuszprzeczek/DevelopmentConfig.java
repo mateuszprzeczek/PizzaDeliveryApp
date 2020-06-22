@@ -69,26 +69,31 @@ public class DevelopmentConfig {
         Pizza pizza1 = new Pizza();
         pizza1.setName("Mozarella");
         pizza1.setIngredients(Arrays.asList(mozarella, tomato, thinCake));
+        pizza1.setPrice(18);
         pizzaRepo.save(pizza1);
 
         Pizza pizza2 = new Pizza();
         pizza2.setName("Salami");
         pizza2.setIngredients(Arrays.asList(tomato, mozarella, salami, thinCake));
+        pizza2.setPrice(20);
         pizzaRepo.save(pizza2);
 
         Pizza pizza3 = new Pizza();
         pizza3.setName("Vege");
         pizza3.setIngredients(Arrays.asList(tomato, onion, mashrooms, mozarella, thinCake));
+        pizza3.setPrice(20);
         pizzaRepo.save(pizza3);
         
         Pizza pizza4 = new Pizza();
         pizza4.setName("Tuna");
         pizza4.setIngredients(Arrays.asList(tomato, onion, tuna, mozarella, olives, thinCake));
+        pizza4.setPrice(22);
         pizzaRepo.save(pizza4);
         
         Pizza pizza5 = new Pizza();
         pizza5.setName("4Sery");
         pizza5.setIngredients(Arrays.asList(tomato, mozarella, cheddar, gorgonsola, parmesan, thinCake));
+        pizza5.setPrice(24);
         pizzaRepo.save(pizza5);
 
       }
