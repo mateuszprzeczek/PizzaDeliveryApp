@@ -9,20 +9,12 @@ public class Ingredient {
 	  private  String id;
 	  private  String name;
 	  private  Type type;
-	  private  Size size;
-	  private double price;
+	  
 	  
 	  public static enum Type {
 	    WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
 	  }
-	  public static enum Size {
-		  SMALL("32cm"), MEDIUM("40cm"), LARGE("50cm"), XLARGE("60cm")
 	  
-	  private final String description;
-	  private Size(String description) {
-		  this.description = description;
-	  }
-	 }
 
 	public Ingredient() {
 		this.type = null;
