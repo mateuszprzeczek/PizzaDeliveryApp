@@ -1,8 +1,11 @@
 package pl.mateuszprzeczek.domain;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +25,8 @@ public class Pizza {
 	  @NotNull
 	  @Size(min=4, message="Name must be at least 4 characters long")
 	  private String name;
+	  private  PizzaSize size;
+	  private  double price;
 	  
 	  private Date createdAt;
 
@@ -33,6 +38,29 @@ public class Pizza {
 	  void createdAt() {
 	    this.createdAt = new Date();
 	  }
+	  
+	  public static enum PizzaSize {
+		  SMALL("32cm", 0.0), MEDIUM("40cm", 0.25), LARGE("50cm", 0.50), XLARGE("60cm", 0.60);
+	  
+	  private final String description;
+	  private final double price;
+
+	  private PizzaSize(String description, double price) {
+		  this.description = description;
+		  this.price = price;
+	  }
+	public String getDescription() {
+		return description;
+	}
+	public static PizzaSize fromDescription(String description) {
+        PizzaSize[] values = values();
+        for (PizzaSize size : values) {
+            if (size.getDescription().equals(description))
+                return size;
+        }
+        return null;
+    }
+	 }
 
 	public Pizza() {
 		super();
@@ -80,6 +108,26 @@ public class Pizza {
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+
+
+	
+
+	public PizzaSize getSize() {
+		return size;
+	}
+
+	public void setSize(PizzaSize size) {
+		this.size = size;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	  
 	  
 
