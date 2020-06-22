@@ -1,18 +1,23 @@
 package pl.mateuszprzeczek.web.api;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import pl.mateuszprzeczek.domain.Pizza;
+import pl.mateuszprzeczek.domain.Pizza.PizzaSize;
 import pl.mateuszprzeczek.repository.PizzaRepository;
 
 @RestController
@@ -46,6 +51,15 @@ public class PizzaRestController {
 	    }
 	    return null;
 	  }
+	@GetMapping(path = "/sizes", produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "*")
+	public List<String> pizzasizes() {
+		ArrayList<String> values = new ArrayList<>();
+        for (PizzaSize size : PizzaSize.values()) {
+                values.add(size.toString());
+        }
+        return values;
+	}
 	
 	
 
