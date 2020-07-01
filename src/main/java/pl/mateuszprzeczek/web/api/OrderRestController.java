@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.mateuszprzeczek.domain.Order;
 import pl.mateuszprzeczek.repository.OrderRepository;
+import pl.mateuszprzeczek.web.api.services.OrderRestService;
 
 @RestController
 @RequestMapping(path = "orders", 
@@ -20,22 +21,24 @@ import pl.mateuszprzeczek.repository.OrderRepository;
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderRestController {
 	
-	private OrderRepository orderRepo;
-
-	@Autowired
-	public OrderRestController(OrderRepository orderRepo) {
-		this.orderRepo = orderRepo;
-	}
+	private OrderRestService orderService;
 	
+	
+	@Autowired
+	public OrderRestController(OrderRestService orderService) {
+		super();
+		this.orderService = orderService;
+	}
+
 	@GetMapping(produces="application/json")
 	  public Iterable<Order> allOrders() {
-	    return orderRepo.findAll();
+	    return orderService.allOrders();
 	  }
 	
 	@PostMapping(consumes="application/json")
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public Order postOrder(@RequestBody Order order) {
-	    return orderRepo.save(order);
+	    return orderService.postOrder(order);
 	  }
 	
 	

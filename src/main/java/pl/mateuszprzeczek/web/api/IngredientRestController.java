@@ -1,6 +1,5 @@
 package pl.mateuszprzeczek.web.api;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.mateuszprzeczek.domain.Ingredient;
-import pl.mateuszprzeczek.repository.IngredientRepository;
+import pl.mateuszprzeczek.web.api.services.IngredientRestService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,26 +18,23 @@ import pl.mateuszprzeczek.repository.IngredientRepository;
 	produces = MediaType.APPLICATION_JSON_VALUE)
 public class IngredientRestController {
 	
-	private IngredientRepository ingredientRepo;
+	private IngredientRestService ingredientService;
 	
 	
 	@Autowired
-	public IngredientRestController(IngredientRepository ingredientRepo) {
-		this.ingredientRepo = ingredientRepo;
+	public IngredientRestController(IngredientRestService ingredientService) {
+		super();
+		this.ingredientService = ingredientService;
 	}
 
 	@GetMapping
 	public Iterable<Ingredient> getIngredients() {
-		return ingredientRepo.findAll();
+		return ingredientService.getIngredients();
 	}
 	
 	@GetMapping("/{id}")
 	  public Ingredient ingredientById(@PathVariable("id") Long id) {
-	    Optional<Ingredient> optIngredient = ingredientRepo.findById(id);
-	    if (optIngredient.isPresent()) {
-	      return optIngredient.get();
-	    }
-	    return null;
-	  }
+		return ingredientService.ingredientById(id);
+	}
 
 }
