@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import pl.mateuszprzeczek.domain.Pizza;
 import pl.mateuszprzeczek.domain.Pizza.PizzaSize;
@@ -31,7 +30,7 @@ public class PizzaRestService {
 		return pizzaRepo.save(pizza);
 	}
 	
-	public Pizza pizzaById(@PathVariable("id") Long id) {
+	public Pizza pizzaById(Long id) {
 	    Optional<Pizza> optTaco = pizzaRepo.findById(id);
 	    if (optTaco.isPresent()) {
 	      return optTaco.get();
@@ -39,7 +38,7 @@ public class PizzaRestService {
 	    return null;
 	  }
 	
-	public List<String> pizzasizes() {
+	public List<String> pizzaSizes() {
 		ArrayList<String> values = new ArrayList<>();
         for (PizzaSize size : PizzaSize.values()) {
                 values.add(size.toString());
