@@ -5,9 +5,15 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +24,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import pl.mateuszprzeczek.domain.Ingredient;
 import pl.mateuszprzeczek.domain.Pizza;
+import pl.mateuszprzeczek.domain.Pizza.PizzaSize;
 import pl.mateuszprzeczek.repository.PizzaRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -119,6 +127,8 @@ class PizzaRestServiceTest {
 	void testGetPizzaByIdShouldReturnNullValue() {
 		
 		//given
+		//doReturn(Optional.of(null)).when(pizzaRepository).findById(1l);
+		
 		//when
 		Pizza returnedPizza = pizzaRestService.pizzaById(1L);
 		
@@ -127,7 +137,7 @@ class PizzaRestServiceTest {
 	}
 	
 	@Test
-	void testPizzaSizes() {
+	void testPizzaSizesShouldReturnNotNullValue() {
 		
 		//given
 		List<String> sizes = Arrays.asList("32cm", "40cm", "50cm", "60cm");
@@ -140,6 +150,59 @@ class PizzaRestServiceTest {
 		
 		//then
 		assertThat(sizesList, notNullValue());
+		verify(pizzaRestService).pizzaSizes();
+		then(pizzaRestService).should().pizzaSizes();
+		assertEquals("32cm", pizzaRestService.pizzaSizes().get(0));
+		assertEquals("40cm", pizzaRestService.pizzaSizes().get(1));
+		assertEquals("50cm", pizzaRestService.pizzaSizes().get(2));
+		assertEquals("60cm", pizzaRestService.pizzaSizes().get(3));
+
+
+	}
+	
+	@Test
+	void testPizzaSizesLoopShouldReturnNotNullValues() {
+		
+		//given
+		List<String> sizes = Arrays.asList("32cm", "40cm", "50cm", "60cm");
+		PizzaRestService pizzaRestService = mock(PizzaRestService.class);
+		
+		given(pizzaRestService.pizzaSizes()).willReturn(sizes);
+		
+		//when
+		List<String> sizesList = pizzaRestService.pizzaSizes();
+		List<String> returnedList = new ArrayList<>();
+		for(String size : sizesList) {
+			returnedList.add(size);
+		}
+		
+		//then
+		assertThat(returnedList, notNullValue());
+
+		assertEquals(returnedList.get(0), pizzaRestService.pizzaSizes().get(0));
+		assertEquals(returnedList.get(1), pizzaRestService.pizzaSizes().get(1));
+		assertEquals(returnedList.get(2), pizzaRestService.pizzaSizes().get(2));
+		assertEquals(returnedList.get(3), pizzaRestService.pizzaSizes().get(3));
+	}
+	
+	@Test
+	void testPizzaSizes() {
+		
+		//given
+		List<String> sizes = Arrays.asList("32cm", "40cm", "50cm", "60cm");
+		PizzaRestService pizzaRestService = mock(PizzaRestService.class);
+		
+		//when
+		when(pizzaRestService.pizzaSizes()).thenReturn(sizes);
+		List<String> sizesList = pizzaRestService.pizzaSizes();
+		
+		
+		//then
+		assertThat(sizesList.get(0), equalTo(PizzaSize.SMALL.getDescription()));
+		assertThat(sizesList.get(1), equalTo(PizzaSize.MEDIUM.getDescription()));
+		assertThat(sizesList.get(2), equalTo(PizzaSize.LARGE.getDescription()));
+		assertThat(sizesList.get(3), equalTo(PizzaSize.XLARGE.getDescription()));
+		
 	}
 	
 	
