@@ -7,34 +7,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
 @Entity
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	  @Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	  private Long id;
-	  
-	  private String username;
-	  
-	  private String password;
-	  private String fullname;
-	  private String street;
-	  private String city;
-	  private String state;
-	  private String zip;
-	  private String phoneNumber;
-	  private String email;
-	  
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
+	private String username;
+
+	private String password;
+	private String fullname;
+	private String street;
+	private String city;
+	private String state;
+	private String zip;
+	private String phoneNumber;
+	private String email;
 
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(Long id, String username, String password, String fullname, String street, String city, String state,
@@ -131,6 +125,5 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	  
-	  
+
 }

@@ -5,16 +5,14 @@ import javax.persistence.Id;
 
 @Entity
 public class Ingredient {
-	  @Id
-	  private  String id;
-	  private  String name;
-	  private  Type type;
-	  
-	  
-	  public static enum Type {
-	    WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
-	  }
-	  
+	@Id
+	private String id;
+	private String name;
+	private Type type;
+
+	public static enum Type {
+		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+	}
 
 	public Ingredient() {
 		this.type = null;
@@ -43,7 +41,6 @@ public class Ingredient {
 		this.name = name;
 	}
 
-
 	public Type getType() {
 		return type;
 	}
@@ -51,8 +48,5 @@ public class Ingredient {
 	public void setType(Type type) {
 		this.type = type;
 	}
-	
-	  
-	  
 
 }

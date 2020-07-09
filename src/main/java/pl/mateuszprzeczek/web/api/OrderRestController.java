@@ -1,8 +1,8 @@
 package pl.mateuszprzeczek.web.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.mateuszprzeczek.domain.Order;
-import pl.mateuszprzeczek.repository.OrderRepository;
 import pl.mateuszprzeczek.web.api.services.OrderRestService;
 
 @RestController

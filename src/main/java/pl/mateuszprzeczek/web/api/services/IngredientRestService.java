@@ -24,7 +24,7 @@ public class IngredientRestService {
 		return ingredientRepo.findAll();
 	}
 	
-	public Ingredient ingredientById(@PathVariable("id") Long id) {
+	public Ingredient ingredientById(@PathVariable("id") String id) {
 	    Optional<Ingredient> optIngredient = ingredientRepo.findById(id);
 	    if (optIngredient.isPresent()) {
 	      return optIngredient.get();

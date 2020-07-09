@@ -33,7 +33,7 @@ public class IngredientRestController {
 	}
 	
 	@GetMapping("/{id}")
-	  public Ingredient ingredientById(@PathVariable("id") Long id) {
+	  public Ingredient ingredientById(@PathVariable("id") String id) {
 		return ingredientService.ingredientById(id);
 	}
 

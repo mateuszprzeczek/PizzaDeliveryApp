@@ -49,10 +49,7 @@ public class PizzaRestController {
 	
 	@GetMapping(path = "/sizes", produces = MediaType.APPLICATION_JSON_VALUE)
 	@CrossOrigin(origins = "*")
-	public List<String> pizzasizes() {
+	public List<String> pizzaSizes() {
 		return pizzaService.pizzaSizes();
 	}
-	
-	
-
 }

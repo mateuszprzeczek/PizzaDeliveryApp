@@ -21,7 +21,7 @@ import pl.mateuszprzeczek.repository.IngredientRepository;
 
 @ExtendWith(MockitoExtension.class)
 class IngredientRestServiceTest {
-	
+
 	@InjectMocks
 	IngredientRestService ingredientRestService;
 	@Mock
@@ -29,64 +29,58 @@ class IngredientRestServiceTest {
 
 	@Test
 	void testGetAllIngredientsShouldReturnNotNullValue() {
-		
-		//given
+
+		// given
 		Iterable<Ingredient> ingredients = prepareIngredientsData();
 		given(ingredientRepository.findAll()).willReturn(ingredients);
-		
-		//when
-		Iterable<Ingredient> returnedIngredients = ingredientRestService.getIngredients();
-		
-		//then
-		assertThat(returnedIngredients.iterator().next().getName(), notNullValue());
-		
-	}
-	
-	
-private Iterable<Ingredient> prepareIngredientsData() {
-		
-		Ingredient thinCake = new Ingredient("THIN", "ciasto cienkie");
-        thinCake.setType(Ingredient.Type.WRAP);
-		
-		Ingredient salami = new Ingredient("SALA", "salami");
-        salami.setType(Ingredient.Type.PROTEIN);
-        
-		Ingredient mozarella = new Ingredient("MZRA", "mozarella");
-        salami.setType(Ingredient.Type.PROTEIN);
 
-        
-        
+		// when
+		Iterable<Ingredient> returnedIngredients = ingredientRestService.getIngredients();
+
+		// then
+		assertThat(returnedIngredients.iterator().next().getName(), notNullValue());
+	}
+
+	private Iterable<Ingredient> prepareIngredientsData() {
+
+		Ingredient thinCake = new Ingredient("THIN", "ciasto cienkie");
+		thinCake.setType(Ingredient.Type.WRAP);
+
+		Ingredient salami = new Ingredient("SALA", "salami");
+		salami.setType(Ingredient.Type.PROTEIN);
+
+		Ingredient mozarella = new Ingredient("MZRA", "mozarella");
+		salami.setType(Ingredient.Type.PROTEIN);
+
 		return Arrays.asList(thinCake, salami, mozarella);
 	}
 
-@Test
-void testGetIngredientByIdShouldNotBeEmpty() {
-	
-	//given
-	Ingredient thinCake = new Ingredient("THIN", "ciasto cienkie");
-    thinCake.setType(Ingredient.Type.WRAP);
-	
-    doReturn(Optional.of(thinCake)).when(ingredientRepository).findById(1l);
+	@Test
+	void testGetIngredientByIdShouldNotBeEmpty() {
 
-    //when
-    Ingredient returnedIngredient = ingredientRestService.ingredientById(1L);
+		// given
+		Ingredient thinCake = new Ingredient("THIN", "ciasto cienkie");
+		thinCake.setType(Ingredient.Type.WRAP);
 
-    //then
-    assertThat(returnedIngredient.getId(), equalTo("THIN"));
-    
-}
+		doReturn(Optional.of(thinCake)).when(ingredientRepository).findById("THIN");
 
-@Test
-void testGetPizzaByIdShouldReturnNullValue() {
-	
-	//given
-	//doReturn(Optional.of(null)).when(pizzaRepository).findById(1l);
-	
-	//when
-	Ingredient returnedIngredient = ingredientRestService.ingredientById(1L);
-	
-	//then
-	assertThat(returnedIngredient, nullValue());
-}
+		// when
+		Ingredient returnedIngredient = ingredientRestService.ingredientById("THIN");
+
+		// then
+		assertThat(returnedIngredient.getId(), equalTo("THIN"));
+
+	}
+
+	@Test
+	void testGetPizzaByIdShouldReturnNullValue() {
+
+		// given
+		// when
+		Ingredient returnedIngredient = ingredientRestService.ingredientById("THIN");
+
+		// then
+		assertThat(returnedIngredient, nullValue());
+	}
 
 }
